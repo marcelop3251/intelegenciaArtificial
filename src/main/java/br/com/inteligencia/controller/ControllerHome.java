@@ -48,5 +48,10 @@ public class ControllerHome {
 		return model;
 	}
 	
+	@RequestMapping(value="deletar", method = RequestMethod.GET)
+	public ModelAndView deletarCompras(){
+		cadastroCompras.deleteCompras();
+		return new ModelAndView("redirect:/home");
+	}
 	
 }

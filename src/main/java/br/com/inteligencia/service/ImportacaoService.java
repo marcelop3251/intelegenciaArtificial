@@ -38,6 +38,9 @@ public class ImportacaoService {
 	
 		Apriori ap = new Apriori();
 		ap.setNumRules(20);
+		ap.setLowerBoundMinSupport(0.1);
+		ap.setUpperBoundMinSupport(0.3);
+		ap.setMinMetric(0.5);
 		ap.buildAssociations(instances);
 		System.out.println(ap.toString());
 		
@@ -66,14 +69,14 @@ public class ImportacaoService {
 				.getResultList();
 
 		int quantidadeDeProduto = listProdutos.size();
-		FastVector fvWekaAttributes = new FastVector(quantidadeDeProduto);
+		ArrayList<Attribute> fvWekaAttributes = new ArrayList<Attribute>();
 		for (Produto p : listProdutos) {			
-			FastVector atributoNominal  = new  FastVector(2);
+			ArrayList<String> atributoNominal  = new  ArrayList<String>();
 			
-			atributoNominal.addElement("sim");
-			atributoNominal.addElement("nao");
+			atributoNominal.add("sim");
+			atributoNominal.add("nao");
 			Attribute atributo = new Attribute(p.getNome(),atributoNominal);
-			fvWekaAttributes.addElement(atributo);
+			fvWekaAttributes.add(atributo);
 		}
 		
 
@@ -103,7 +106,7 @@ public class ImportacaoService {
 
 				}
 				
-				instance.setValue((Attribute)fvWekaAttributes.elementAt(contador), valor);
+				instance.setValue((Attribute)fvWekaAttributes.get(contador), valor);
 				contador++;
 			}
 			instances.add(instance);

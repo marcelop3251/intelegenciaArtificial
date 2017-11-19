@@ -60,18 +60,22 @@ public class CadastrarCompras {
 	}
 
 
-	private List<Produto> selecionarProdutos(List<Produto> produto) {
-		
-		
-		
+	private List<Produto> selecionarProdutos(List<Produto> produto) {		
 		int total =  randon.nextInt(produto.size());
+		total = produto.size() - total;
 		List<Produto> produtoAleatorio = new ArrayList<>();
 		for(int i =0; i < total; i++){
 			produtoAleatorio.add(produto.get(randon.nextInt(produto.size())));
-		}
-		
+		}		
 		
 		return produtoAleatorio;
+	}
+	
+	@Transactional(readOnly = false)
+	public void deleteCompras(){
+//		entityManager.createQuery("update Compras c set idProduto = null").executeUpdate();
+//		entityManager.flush();
+		entityManager.createQuery("delete from Compras c").executeUpdate();
 	}
 	
 	

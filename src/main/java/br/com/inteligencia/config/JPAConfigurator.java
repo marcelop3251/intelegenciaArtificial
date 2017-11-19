@@ -23,9 +23,8 @@ public class JPAConfigurator {
 	@Bean
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory(
 			DataSource dataSource, Properties additionalProperties) {
-		LocalContainerEntityManagerFactoryBean factoryBean = 
-				new LocalContainerEntityManagerFactoryBean();
-		factoryBean.setPackagesToScan("br.com.inteligencia.model"/*,"br.com.isofree.convert"*/);
+		LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+		factoryBean.setPackagesToScan("br.com.inteligencia.model");
 		factoryBean.setDataSource(dataSource);
 		
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
